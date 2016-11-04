@@ -26,11 +26,7 @@
     <![endif]-->
   </head>
   <body>
-    <!--Die Tagenamen müssen noch angegeben werden-->
-    <script src = "issuetracker.tag" type = "riot.tag"></script>
-    <script>
-      riot.mount('*')
-    </script>
+      
     <!-- NAVBAR ELEMENT -->
     <nav class="navbar navbar-default">
       <div class="container">
@@ -51,7 +47,7 @@
         </div>
       </div>
     </nav>
-
+		<alert></alert>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -100,11 +96,13 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="title">Issues</h3>
+              <h3 class="panel-title">Issues</h3>
             </div>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3">
+								<label> Select Priority
+								</label>
                   <select class="form-control">
                     <option>1</option>
                     <option>2</option>
@@ -113,106 +111,76 @@
                     <option>5</option>
                   </select>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
+                <div class="col-md-3"><div class = "form-group">
+								<label> Choose Date
+								</label>
+								<input  type="text" placeholder="Chose date"  id="datepicker" class="datepicker form-control"></div>
+								</div>
+                <div class="col-md-4"><div class = "form-group">
+								<label>
+                      Enter something
+                    </label>
+                    <textarea class="form-control" name=""></textarea>
+										</div>
+								</div>
+                <div class="col-md-2"><div class="form-group">
+                    <label>
+                      &nbsp;
+                    </label>
+                    <button class="form-control btn btn-primary">Create</button>
+                  </div></div>
+							
               </div>
             </div>
           </div>
         </div>
       </div>
+			<div class = "row">
+				<div class = "col-md-12">
+					<table class = "table table-bordered">
+					
+						<thead>
+							<tr>
+								<th>
+									done
+								</th>
+								<th>
+									description
+								</th>
+								<th>
+									date
+								</th>
+								<th>
+									delete
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									done
+								</td>
+								<td>
+									text
+								</td>
+								<td>
+									2006 12 23
+								</td>
+								<td>
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 
-        <div class="issue-container" id="issue">
-          <div class="issue create-case col-xs-6 col-md-12">
-            <div class="case-list col-md-3">
-              <label for="dummyMultiSelect">Select a Project</label>
-              <select multiple id="dummy-select" class="form-control">
-                <option value="Issue 1">Issue 1</option>
-                <option value="Issue 2">Issue 2</option>
-                <option value="Issue 3">Issue 3</option>
-                <option value="Issue 4">Issue 4</option>
-              </select>
-            </div>
-            <div class="new-case-bar col-md-7">
-              <input type="text" class="form-control" value="new project..." id="text-input">
-            </div>
-            <div class="create-project-button col-md-2">
-              <button type="submit" class="btn btn-primary">Create Project</button>
-            </div>
-          </div>
-          <!--                                        -->
-          <div class="issue create-issue col-xs-6 col-md-12">
-            <div class="col-md-2">
-              <select name="Priority" id="" class="selectpicker">
-                <option  selected="selected" disabled="disabled">Priority</option>
-
-                <option value="4">4</option>
-
-                <option value="3">3</option>
-
-                <option value="2">2</option>
-
-                <option value="1">1</option>
-
-              </select>
-            </div>
-            <div class="col-md-2">
-              <input  type="text" placeholder="Chose date"  id="datepicker" class="datepicker">
-            </div>
-            <div class="col-md-6">
-              <input type="text" class="form-control" value="new issue..." id="text-input">
-            </div>
-            <div class="col-md-2">
-              <button type="submit" class="btn btn-primary">Submit Issue</button>
-            </div>
-          </div>
-          <!--                                        -->
-          <div class="issue issue-list col-xs-6 col-md-12">
-            <div class="col-md-12">
-              <div class="col-md-12 issue-item-row">
-                <div class="col-md-9 issue-checks">
-                  <label class="issue-check-label">
-                    <input type="checkbox" class="form-check-input" id="isse-row-item">
-                    Issue 1
-                  </label>
-                </div>
-                <div class="col-md-2 issue-dates">
-                  2016-03-21
-                </div>
-                <col-md-1 class="icon-recycle">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              </col-md-1>
-            </div>
-            <div class="col-md-12 issue-item-row">
-              <div class="col-md-9 issue-checks">
-                <label class="issue-check-label">
-                  <input type="checkbox" class="form-check-input" id="isse-row-item">
-                  Issue 1
-                </label>
-              </div>
-              <div class="col-md-2 issue-dates">
-                2016-03-21
-              </div>
-              <col-md-1 class="icon-recycle">
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </col-md-1>
-          </div>
-          <div class="col-md-12 issue-item-row">
-            <div class="col-md-9 issue-checks">
-              <label class="issue-check-label">
-                <input type="checkbox" class="form-check-input" id="isse-row-item">
-                Issue 1
-              </label>
-            </div>
-            <div class="col-md-2 issue-dates">
-              2016-03-21
-            </div>
-            <col-md-1 class="icon-recycle">
-            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          </col-md-1>
-        </div>
-      </div>
-    </div>
+        
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!--Die Tagenamen müssen noch angegeben werden-->
+		<script src = "issuetracker.tag" type = "riot.tag"></script>
+    <script>
+      riot.mount('alert',{message:"hello Adam"})
+    </script>
   </body>
 </html>
