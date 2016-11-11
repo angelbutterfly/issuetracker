@@ -89,13 +89,10 @@
 					</table>
 				</div>
 			</div>
-
+	<script>
+		this.issues = opts.issues;
+	</script>
 </issuetracker>
 
-<script>
-	this.issues = opts.issues;
-	
 
-
-</script>
 
