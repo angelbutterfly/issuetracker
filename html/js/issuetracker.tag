@@ -6,6 +6,7 @@
               <h3 class="panel-title">Issues</h3>
             </div>
             <div class="panel-body">
+						<form onsubmit={ add }>
               <div class="row">
                 <div class="col-md-3">
 								<label> Select Priority
@@ -21,14 +22,14 @@
                 <div class="col-md-3"><div class = "form-group">
 								<label> Choose Date
 								</label>
-								<input  type="text" placeholder="Chose date" id="datepicker" class="datepicker form-control"></input></div>
+								<input  type="text" placeholder="Chose date" id="datepicker" class="datepicker form-control" name = "date" onchange = {setDate}></input></div>
 								</div>
                 <div class="col-md-4">
 									<div class = "form-group">
 										<label>
 												Describe your Issue
 										</label>
-										<textarea class="form-control" name=""></textarea>
+										<textarea class="form-control" name="description" onkeyup = {setDescription }></textarea>
 									</div>
 								</div>
                 <div class="col-md-2"><div class="form-group">
@@ -39,6 +40,7 @@
                   </div></div>
 							
               </div>
+							</form>
             </div>
           </div>
         </div>
@@ -91,6 +93,18 @@
 			</div>
 	<script>
 		this.issues = opts.issues;
+		setDescription(e){
+			this.descriptionValue = e.target.value;
+		}
+		setDate(e){
+			this.dateValue = e.target.value;
+		}
+		add(e) {
+      this.issues.push({ description: this.descriptionValue, date: this.dateValue });
+      this.descriptionValue = this.description.value = '';
+			this.dateValue = this.date.value = '';
+    
+}
 	</script>
 </issuetracker>
 
