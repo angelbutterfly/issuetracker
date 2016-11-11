@@ -67,24 +67,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr each={ issues }>
+							<tr each={ issues } class = { completed: done}>
 								<td>
 								<!-- I have included a checkbox -->
 								<div class="form-check">
 									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" value=""></input>
-											{ state }
+										<input class="form-check-input" type="checkbox" value="" onclick = {parent.toggle}></input>
 									</label>
 								</div>
 								</td>
-								<td>
+								<td class = "description">
 									{ description }
 								</td>
-								<td>
+								<td class = "date">
 									{ date }
 								</td>
 								<td>
-									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									<span class="glyphicon glyphicon-trash" aria-hidden="true" onclick = {parent.delete}></span>
 								</td>
 							</tr>
 						</tbody>
@@ -94,12 +93,20 @@
 	<script>
 		this.issues = opts.issues;
 		add(e) {
-      this.issues.push({ description: this.description.value, date: this.datepicker.value });
+      this.issues.push({ client_id: guid(), description: this.description.value, date: this.datepicker.value });
 			this.description.value = '';
-			this.datepicker.value = '';
-			
-    
-}
+			this.datepicker.value = ''; 
+		}
+		toggle(e){
+			var item = e.item
+      item.done = !item.done
+			return true
+		}
+		delete(e){
+			this.issues = this.issues.filter(function(issue){
+				return e.item.client_id !== issue.client_id;
+			})
+		}
 	</script>
 </issuetracker>
 
