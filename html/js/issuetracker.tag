@@ -22,14 +22,14 @@
                 <div class="col-md-3"><div class = "form-group">
 								<label> Choose Date
 								</label>
-								<input  type="text" placeholder="Chose date" id="datepicker" class="datepicker form-control" name = "date" onchange = {setDate}></input></div>
+								<input  type="text" placeholder="Chose date" id="datepicker" class="datepicker form-control"></input></div>
 								</div>
                 <div class="col-md-4">
 									<div class = "form-group">
 										<label>
 												Describe your Issue
 										</label>
-										<textarea class="form-control" name="description" onkeyup = {setDescription }></textarea>
+										<textarea class="form-control" name="description"></textarea>
 									</div>
 								</div>
                 <div class="col-md-2"><div class="form-group">
@@ -81,7 +81,7 @@
 									{ description }
 								</td>
 								<td>
-									2006 12 23
+									{ date }
 								</td>
 								<td>
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -93,16 +93,11 @@
 			</div>
 	<script>
 		this.issues = opts.issues;
-		setDescription(e){
-			this.descriptionValue = e.target.value;
-		}
-		setDate(e){
-			this.dateValue = e.target.value;
-		}
 		add(e) {
-      this.issues.push({ description: this.descriptionValue, date: this.dateValue });
-      this.descriptionValue = this.description.value = '';
-			this.dateValue = this.date.value = '';
+      this.issues.push({ description: this.description.value, date: this.datepicker.value });
+			this.description.value = '';
+			this.datepicker.value = '';
+			
     
 }
 	</script>
