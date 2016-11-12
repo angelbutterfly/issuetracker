@@ -91,21 +91,26 @@
 				</div>
 			</div>
 	<script>
+    var issueTrackerStorage = new Store('issues');
+
 		this.issues = opts.issues;
 		add(e) {
       this.issues.push({ client_id: guid(), description: this.description.value, date: this.datepicker.value });
+      issueTrackerStorage.dump(this.issues);
 			this.description.value = '';
 			this.datepicker.value = ''; 
 		}
 		toggle(e){
-			var item = e.item
-      item.done = !item.done
-			return true
+			var item = e.item;
+      item.done = !item.done;
+      issueTrackerStorage.dump(this.issues);
+			return true;
 		}
 		delete(e){
-			this.issues = this.issues.filter(function(issue){
+			this.issues = this.issues.filter(function(issue) {
 				return e.item.client_id !== issue.client_id;
-			})
+			});
+    issueTrackerStorage.dump(this.issues);
 		}
 	</script>
 </issuetracker>

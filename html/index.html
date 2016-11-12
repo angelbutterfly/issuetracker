@@ -102,7 +102,24 @@
 		<!--Die Tagenamen müssen noch angegeben werden-->
 		<script src = "/js/issuetracker.tag" type = "riot/tag"></script>
     <script>
-      riot.mount('issuetracker', {issues: []});
+      function Store(namespace, initialStore) {
+        this.namespace = namespace;
+        if ((typeof(initialStore) !== 'undefined') && (typeof(localStorage.getItem(namespace)) == 'undefined')) {
+          localStorage.setItem(namespace, JSON.stringify(initialStore));
+        }
+      }
+
+      Store.prototype.dump = function(issues) {
+        return localStorage.setItem(this.namespace, JSON.stringify(issues));
+      }
+
+      Store.prototype.load = function(issues) {
+        return JSON.parse(localStorage.getItem(this.namespace));
+      }
+
+      var issueTrackerStorage = new Store('issues', []);
+
+      riot.mount('issuetracker', {issues: issueTrackerStorage.load()});
     </script>
   </body>
 </html>
