@@ -72,7 +72,7 @@
 								<!-- I have included a checkbox -->
 								<div class="form-check">
 									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" value="" onclick = {parent.toggle}></input>
+										<input class="form-check-input" type="checkbox" value="" checked={ done } onclick = {parent.toggle}></input>
 									</label>
 								</div>
 								</td>
