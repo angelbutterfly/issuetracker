@@ -104,7 +104,7 @@
     <script>
       function Store(namespace, initialStore) {
         this.namespace = namespace;
-        if ((typeof(initialStore) !== 'undefined') && (typeof(localStorage.getItem(namespace)) == 'undefined')) {
+        if ((typeof(initialStore) !== 'undefined') && !localStorage.getItem(namespace)) {
           localStorage.setItem(namespace, JSON.stringify(initialStore));
         }
       }
