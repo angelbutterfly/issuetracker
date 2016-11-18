@@ -80,9 +80,10 @@
       }
 
       var issueTrackerStorage = new Store('issues', []);
+      var projectStorage = new Store('projects', []);
 
       riot.mount('issuetracker', {issues: issueTrackerStorage.load()});
-      riot.mount('project', {projects: [{name:"myproject"}]});
+      riot.mount('project', {projects: projectStorage.load()});
     </script>
   </body>
 </html>
