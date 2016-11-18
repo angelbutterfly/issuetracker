@@ -13,7 +13,7 @@
               <label>
                 Select a project!
               </label>
-              <select multiple class="form-control">
+              <select multiple class="form-control" onselect = {selectCurrentProject}>
                 <option each={ projects }>{ name } </option>
               </select>
             </div>
@@ -40,6 +40,8 @@
     </div>
   </div>
 </div>
+
+<issuetracker if={ projects.length }></issuetracker>
 <script>
   this.projects = opts.projects;
   var projectStorage = new Store("projects");
@@ -48,5 +50,9 @@
     projectStorage.dump(this.projects);
 		this.name.value = '';
 	}
+  selectCurrentProject(e){
+    this.currentProject = e.item;
+
+  }
 </script>
 </project>

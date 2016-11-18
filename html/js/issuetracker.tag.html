@@ -67,7 +67,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr each={ issues } class = { completed: done}>
+					<tr each={ issues.filter(isCurrentProjectIssue) } class = { completed: done}>
 						<td>
 							<!-- I have included a checkbox -->
 							<div class="form-check">
@@ -92,10 +92,10 @@
 	</div>
 	<script>
 	var issueTrackerStorage = new Store('issues');
-
+	var currentProject = this.parent.currentProject;
 	this.issues = opts.issues;
 	add(e) {
-		this.issues.push({ client_id: guid(), description: this.description.value, date: this.datepicker.value });
+		this.issues.push({ project_id: currentProject.client_id, client_id: guid(), description: this.description.value, date: this.datepicker.value });
 		issueTrackerStorage.dump(this.issues);
 		this.description.value = '';
 		this.datepicker.value = '';
@@ -111,6 +111,9 @@
 			return e.item.client_id !== issue.client_id;
 		});
 		issueTrackerStorage.dump(this.issues);
+	}
+	isCurrentProjectIssue(issue){
+			return issue.project_id === currentProject.client_id;
 	}
 	</script>
 </issuetracker>
