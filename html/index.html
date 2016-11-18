@@ -26,7 +26,7 @@
     <![endif]-->
   </head>
   <body>
-      
+
     <!-- NAVBAR ELEMENT -->
     <nav class="navbar navbar-default">
       <div class="container">
@@ -47,60 +47,22 @@
         </div>
       </div>
     </nav>
-		
+
 		<div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class='panel-title'>New Project</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label>
-                      Select something!
-                    </label>
-                    <select multiple class="form-control">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <label>
-                      Enter something
-                    </label>
-                    <textarea class="form-control" name=""></textarea>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="form-group">
-                    <label>
-                      &nbsp;
-                    </label>
-                    <button class="form-control btn btn-primary">Create</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
 			<!-- Trying to put everything in a Riot Tag -->
+      <project>
+
+      </project>
 			<issuetracker>
-      
+
 			</issuetracker>
-			
-        
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<!--Die Tagenamen müssen noch angegeben werden-->
-		<script src = "/js/issuetracker.tag" type = "riot/tag"></script>
+		<!--Die Tagenamen mï¿½ssen noch angegeben werden-->
+    <script src = "/js/project.tag.html" type = "riot/tag"></script>
+		<script src = "/js/issuetracker.tag.html" type = "riot/tag"></script>
     <script>
       function Store(namespace, initialStore) {
         this.namespace = namespace;
@@ -120,6 +82,7 @@
       var issueTrackerStorage = new Store('issues', []);
 
       riot.mount('issuetracker', {issues: issueTrackerStorage.load()});
+      riot.mount('project', {projects: [{name:"myproject"}]});
     </script>
   </body>
 </html>

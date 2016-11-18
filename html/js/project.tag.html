@@ -1,0 +1,50 @@
+<project>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class='panel-title'>New Project</h3>
+      </div>
+      <div class="panel-body">
+        	<form onsubmit={ add }>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <label>
+                Select a project!
+              </label>
+              <select multiple class="form-control">
+                <option each={ projects }>{ name } </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label>
+                Enter project name
+              </label>
+              <input type = "text" class="form-control" name="name"/>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>
+                &nbsp;
+              </label>
+              <button class="form-control btn btn-primary">Create</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  this.projects = opts.projects;
+  add(e) {
+		this.projects.push({ client_id: guid(), name: this.name.value});
+		this.name.value = '';
+	}
+</script>
+</project>
