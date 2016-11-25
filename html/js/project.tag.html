@@ -13,8 +13,8 @@
               <label>
                 Select a project!
               </label>
-              <select multiple class="form-control" onselect = {selectCurrentProject}>
-                <option each={ projects }>{ name } </option>
+              <select multiple class="form-control">
+                <option each={ projects } onclick = { selectCurrentProject }>{ name } </option>
               </select>
             </div>
           </div>
@@ -41,18 +41,26 @@
   </div>
 </div>
 
-<issuetracker if={ projects.length }></issuetracker>
+<div each={ projects.filter(isCurrentProject) }>
+  <issuetracker project= { this }></issuetracker>
+</div>
+
 <script>
   this.projects = opts.projects;
-  var projectStorage = new Store("projects");
+  this.currentProjectClientID = opts.currentProjectClientID;
+  //var projectStorage = new Store("projects");
+
   add(e) {
 		this.projects.push({ client_id: guid(), name: this.name.value});
-    projectStorage.dump(this.projects);
+    //projectStorage.dump(this.projects);
 		this.name.value = '';
 	}
   selectCurrentProject(e){
-    this.currentProject = e.item;
+    this.currentProjectClientID = e.item.client_id;
+  }
 
+  isCurrentProject(project) {
+    return project.client_id === this.currentProjectClientID;
   }
 </script>
 </project>

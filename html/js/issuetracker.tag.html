@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Issues</h3>
+          <h3 class="panel-title">Issues for Project { project.name }</h3>
 				</div>
 				<div class="panel-body">
 					<form onsubmit={ add }>
@@ -49,7 +49,6 @@
 	<div class = "row">
 		<div class = "col-md-12">
 			<table class = "table table-bordered">
-
 				<thead>
 					<tr>
 						<th>
@@ -67,12 +66,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr each={ issues.filter(isCurrentProjectIssue) } class = { completed: done}>
+					<tr each={ issues } class = { completed: done}>
 						<td>
 							<!-- I have included a checkbox -->
 							<div class="form-check">
 								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" value="" checked={ done } onclick = {parent.toggle}></input>
+									<input class="form-check-input" type="checkbox" value="" checked={ done } onclick = { parent.toggle }></input>
 								</label>
 							</div>
 						</td>
@@ -83,7 +82,7 @@
 							{ date }
 						</td>
 						<td>
-							<span class="glyphicon glyphicon-trash" aria-hidden="true" onclick = {parent.delete}></span>
+							<span class="glyphicon glyphicon-trash" aria-hidden="true" onclick = {parent.delete }></span>
 						</td>
 					</tr>
 				</tbody>
@@ -91,29 +90,26 @@
 		</div>
 	</div>
 	<script>
-	var issueTrackerStorage = new Store('issues');
-	var currentProject = this.parent.currentProject;
-	this.issues = opts.issues;
-	add(e) {
-		this.issues.push({ project_id: currentProject.client_id, client_id: guid(), description: this.description.value, date: this.datepicker.value });
-		issueTrackerStorage.dump(this.issues);
-		this.description.value = '';
-		this.datepicker.value = '';
-	}
-	toggle(e){
-		var item = e.item;
-		item.done = !item.done;
-		issueTrackerStorage.dump(this.issues);
-		return true;
-	}
-	delete(e){
-		this.issues = this.issues.filter(function(issue) {
-			return e.item.client_id !== issue.client_id;
-		});
-		issueTrackerStorage.dump(this.issues);
-	}
-	isCurrentProjectIssue(issue){
-			return issue.project_id === currentProject.client_id;
-	}
+    this.project = opts.project;
+    this.issues = opts.project.issues;
+
+  add(e) {
+    this.issues.push({client_id: guid(), description: this.description.value, date: this.datepicker.value});
+    //issueTrackerStorage.dump(this.issues);
+    this.description.value = '';
+    this.datepicker.value = '';
+  }
+  toggle(e){
+    var item = e.item;
+    item.done = !item.done;
+    //issueTrackerStorage.dump(this.issues);
+    return true;
+  }
+  delete(e){
+    this.issues = this.issues.filter(function(issue) {
+      return e.item.client_id !== issue.client_id;
+    });
+    //issueTrackerStorage.dump(this.issues);
+  }
 	</script>
 </issuetracker>

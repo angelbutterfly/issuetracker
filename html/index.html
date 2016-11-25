@@ -72,12 +72,22 @@
         return JSON.parse(localStorage.getItem(this.namespace));
       }
 
-      var issueTrackerStorage = new Store('issues', []);
-      var projectStorage = new Store('projects', []);
 
-      riot.mount('project', {projects: projectStorage.load()});
-      riot.mount('issuetracker', {issues: issueTrackerStorage.load()});
+      var store = {
+        currentProject: null,
+        projects: [
+          {client_id: guid(), id: 1, name: 'My project', issues: [
+            {client_id: guid(), id: 1, description: 'My project issue', date: '11.11.2016'}
+          ]},
+          {client_id: guid(), id: 2, name: 'Another project', issues: [
+            {client_id: guid(), id: 2, description: 'Another project issue 1', date: '02.02.2016'},
+            {client_id: guid(), id: 3, description: 'Another project issue 2', date: '04.03.2016'}
+          ]}
+        ]
+      };
+      //var projectStorage = new Store('projects', {projects: []})
 
+      riot.mount('project', store);
     </script>
   </body>
 </html>
