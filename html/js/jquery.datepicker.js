@@ -1,5 +1,3 @@
-$(document).ready(function () {
-	$('#datepicker').datepicker({
-		format: "dd/mm/yyyy"
-	});       
+$(document).delegate(".datepicker", "focusin", function(){
+  $(this).datepicker({format: "dd/mm/yyyy"});
 });
