@@ -5,19 +5,19 @@
   </pre>
   <div class='app'>
     <form onsubmit={ add }>
-      <input type="text" class="text" value="" name="project">
+      <input type="text" class="text" value="" name="projectTitle">
       <button>Add</button>
     </form>
     <ul each={ projects }>
-      <project opts= { project }/>
+      <project opts= { title }/>
     </ul>
   </div>
 </div>
   <script>
     this.projects = opts.projects;
     add(e) {
-      this.projects.push({name: this.project.value, issues: []})
-      this.project.value = '';
+      this.projects.push({title: this.projectTitle.value, issues: []})
+      this.projectTitle.value = '';
     }
     remove(e) {
       var project = e.item;
@@ -40,9 +40,9 @@
 
 <project>
   <li>
-    <a href="#" onclick={ parent.remove } data={ this }>X</a> { name }
+    <a href="#" onclick={ parent.remove } data={ this }>X</a> { title }
     <form onsubmit={ add }>
-      <input type="text" class="text" value="" name="issue">
+      <input type="text" class="text" value="" name="issueTitle">
       <button>Add</button>
     </form>
     <ul each={ this.issues }>
@@ -50,10 +50,9 @@
     </ul>
   </li>
   <script>
-    console.log(this.opts)
     add(e) {
-      this.issues.push({name: this.issue.value})
-      this.issue.value = '';
+      this.issues.push({title: this.issueTitle.value})
+      this.issueTitle.value = '';
     }
     remove(e) {
       var issue = e.item;
@@ -66,7 +65,7 @@
 
 <issue>
   <li>
-    <a href="#" onclick={ parent.remove } data={ this }>X</a> { name }
+    <a href="#" onclick={ parent.remove } data={ this }>X</a> { title }
   </li>
   </script>
 </issue>
