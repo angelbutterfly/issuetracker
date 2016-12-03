@@ -41,26 +41,16 @@
   </div>
 </div>
 
-<div each={ projects.filter(isCurrentProject) }>
-  <issuetracker project= { this }></issuetracker>
+<div each={ projects }>
+  <issuetracker/>
 </div>
 
 <script>
   this.projects = opts.projects;
-  this.currentProjectClientID = opts.currentProjectClientID;
-  //var projectStorage = new Store("projects");
 
   add(e) {
-		this.projects.push({ client_id: guid(), name: this.name.value});
-    //projectStorage.dump(this.projects);
+		this.projects.push({ client_id: guid(), name: this.name.value, issues: []});
 		this.name.value = '';
 	}
-  selectCurrentProject(e){
-    this.currentProjectClientID = e.item.client_id;
-  }
-
-  isCurrentProject(project) {
-    return project.client_id === this.currentProjectClientID;
-  }
 </script>
 </project>
