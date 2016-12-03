@@ -3,56 +3,57 @@
   <pre style='display:none'>
 { JSON.stringify(store, null, 2) }
   </pre>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class='panel-title'>New Project</h3>
-        </div>
-        <div class="panel-body">
-            <form onsubmit={ add }>
-          <div class="row">
-            <div class="col-md-5">
-              <div class="form-group">
-                <label>
-                  Select a project!
-                </label>
-                <select multiple class="form-control">
-                  <option each={ projects } onclick = { selectCurrentProject }>{ title } </option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="form-group">
-                <label>
-                  Enter project name
-                </label>
-                <input type = "text" class="form-control" name="projectTitle"/>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="form-group">
-                <label>
-                  &nbsp;
-                </label>
-                <button class="form-control btn btn-primary">Create</button>
-              </div>
-            </div>
+  <div class="app">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class='panel-title'>New Project</h3>
           </div>
-        </form>
+          <div class="panel-body">
+              <form onsubmit={ add }>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label>
+                    Select a project!
+                  </label>
+                  <select multiple class="form-control">
+                    <option each={ projects } onclick = { selectCurrentProject }>{ title } </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label>
+                    Enter project name
+                  </label>
+                  <input type = "text" class="form-control" name="projectTitle"/>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>
+                    &nbsp;
+                  </label>
+                  <button class="form-control btn btn-primary">Create</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div each={ projects }>
-    <project opts= { title }/>
-  </div>
+    <div each={ projects.filter(isCurrentProject) }>
+      <project/>
+    </div>
   </div>
 </div>
   <script>
     this.projects = opts.projects;
     add(e) {
-      this.projects.push({title: this.projectTitle.value, issues: []})
+      this.projects.push({client_id: guid(), title: this.projectTitle.value, issues: []})
       this.projectTitle.value = '';
     }
     remove(e) {
@@ -60,16 +61,25 @@
       var index = this.projects.indexOf(project);
       this.projects.splice(index, 1);
     }
+
+    selectCurrentProject(e){
+      this.currentProjectClientID = e.item.client_id;
+    }
+
+    isCurrentProject(project) {
+      return project.client_id === this.currentProjectClientID;
+    }
   </script>
   <style type="text/css">
     .debug pre {
       display: block !important;
       float:left;
-      width: 400px;
+      width: 35%;
       font-size: 10px;
     }
     .debug .app {
-      margin-left: 450px;
+      float: right;
+      width: 60%;
     }
   </style>
 </app>
@@ -105,7 +115,7 @@
                   <label>
                     Describe your Issue
                   </label>
-                  <textarea class="form-control" name="issueTitle"></textarea>
+                  <input type="text" class="form-control" value="" name="issueTitle">
                 </div>
               </div>
               <div class="col-md-2"><div class="form-group">
@@ -149,7 +159,7 @@
   </div>
   <script>
     add(e) {
-      this.issues.push({title: this.issueTitle.value, due_date: this.datepicker.value})
+      this.issues.push({client_id: guid(), title: this.issueTitle.value, due_date: this.datepicker.value})
       this.issueTitle.value = '';
     }
 

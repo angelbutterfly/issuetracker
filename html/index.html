@@ -54,8 +54,8 @@
         debug:  true,
         currentProject: null,
         projects: [
-          {title: 'Project 1', issues: [{title: 'Issue 1.1'}]},
-          {title: 'Project 2', issues: [{title: 'Issue 1.2'}]}
+          {client_id: guid(), title: 'Project 1', issues: [{client_id: guid(), title: 'Issue 1.1'}]},
+          {client_id: guid(), title: 'Project 2', issues: [{client_id: guid(), title: 'Issue 1.2'}]}
         ]
       };
       riot.mount('app', store);
