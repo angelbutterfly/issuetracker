@@ -1,0 +1,59 @@
+<app>
+  <pre style='float:left; width: 400px; font-size: 10px'>
+    { JSON.stringify(store, null, 2) }
+  </pre>
+  <div style='margin-left: 450px'>
+    <form onsubmit={ add }>
+      <input type="text" class="text" value="" name="project">
+      <button>Add</button>
+    </form>
+    <ul each={ projects }>
+      <project opts= { project }/>
+    </ul>
+  </div>
+  <script>
+    this.projects = opts.projects;
+    add(e) {
+      this.projects.push({name: this.project.value, issues: []})
+      this.project.value = '';
+    }
+    remove(e) {
+      var project = e.item;
+      var index = this.projects.indexOf(project);
+      this.projects.splice(index, 1);
+    }
+  </script>
+</app>
+
+<project>
+  <li>
+    <a href="#" onclick={ parent.remove } data={ this }>X</a> { name }
+    <form onsubmit={ add }>
+      <input type="text" class="text" value="" name="issue">
+      <button>Add</button>
+    </form>
+    <ul each={ this.issues }>
+      <issue/>
+    </ul>
+  </li>
+  <script>
+    console.log(this.opts)
+    add(e) {
+      this.issues.push({name: this.issue.value})
+      this.issue.value = '';
+    }
+    remove(e) {
+      var issue = e.item;
+      var index = this.issues.indexOf(issue);
+      this.issues.splice(index, 1);
+      this.parent.update();
+    }
+  </script>
+</project>
+
+<issue>
+  <li>
+    <a href="#" onclick={ parent.remove } data={ this }>X</a> { name }
+  </li>
+  </script>
+</issue>

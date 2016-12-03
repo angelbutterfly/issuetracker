@@ -52,7 +52,10 @@
     <script>
       var store = {
         currentProject: null,
-        projects: [{name: 'fff', issues: [{name: 'fff'}]}]
+        projects: [
+          {name: 'Project 1', issues: [{name: 'Issue 1.1'}]},
+          {name: 'Project 2', issues: [{name: 'Issue 1.2'}]}
+        ]
       };
       riot.mount('app', store);
     </script>
