@@ -1,8 +1,9 @@
 <app>
-  <pre style='float:left; width: 400px; font-size: 10px'>
+<div class={ debug: opts.debug }>
+  <pre style='display:none'>
     { JSON.stringify(store, null, 2) }
   </pre>
-  <div style='margin-left: 450px'>
+  <div class='app'>
     <form onsubmit={ add }>
       <input type="text" class="text" value="" name="project">
       <button>Add</button>
@@ -11,6 +12,7 @@
       <project opts= { project }/>
     </ul>
   </div>
+</div>
   <script>
     this.projects = opts.projects;
     add(e) {
@@ -23,6 +25,17 @@
       this.projects.splice(index, 1);
     }
   </script>
+  <style type="text/css">
+    .debug pre {
+      display: block !important;
+      float:left;
+      width: 400px;
+      font-size: 10px;
+    }
+    .debug .app {
+      margin-left: 450px;
+    }
+  </style>
 </app>
 
 <project>
