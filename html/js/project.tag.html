@@ -1,56 +1,99 @@
 <project>
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class='panel-title'>New Project</h3>
-      </div>
-      <div class="panel-body">
-        	<form onsubmit={ add }>
-        <div class="row">
-          <div class="col-md-5">
-            <div class="form-group">
-              <label>
-                Select a project!
-              </label>
-              <select multiple class="form-control">
-                <option each={ projects } onclick = { selectCurrentProject }>{ name } </option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-5">
-            <div class="form-group">
-              <label>
-                Enter project name
-              </label>
-              <input type = "text" class="form-control" name="name"/>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label>
-                &nbsp;
-              </label>
-              <button class="form-control btn btn-primary">Create</button>
-            </div>
-          </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{ title } Issues</h3>
         </div>
-      </form>
+        <div class="panel-body">
+          <form onsubmit={ add }>
+            <div class="row">
+              <div class="col-md-3">
+                <label> Select Priority
+                </label>
+                <select required=true class="form-control" name='priority'>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <div class="col-md-3"><div class = "form-group">
+                <label> Choose Date
+                </label>
+                <input required=true type="text" placeholder="Chose date" name="datepicker" class="datepicker form-control"></input></div>
+              </div>
+              <div class="col-md-4">
+                <div class = "form-group">
+                  <label>
+                    Describe your Issue
+                  </label>
+                  <input required=true type="text" class="form-control" value="" name="issueTitle">
+                </div>
+              </div>
+              <div class="col-md-2"><div class="form-group">
+                <label>
+
+                </label>
+                <button class="form-control btn btn-primary" id = "save_issue">Create</button>
+              </div></div>
+
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <div class = "row">
+    <div class = "col-md-12">
+      <table class = "table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              Done
+            </th>
+            <th>
+              Priority
+            </th>
+            <th>
+              Date
+            </th>
+            <th>
+              Description
+            </th>
+            <th>
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr each={ this.issues } data-is="issue" class= { completed: done }>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    add(e) {
+      this.issues.push({client_id: guid(), title: this.issueTitle.value, due_date: this.datepicker.value, priority: this.priority.value})
+      this.issueTitle.value = '';
+      this.datepicker.value = '';
+      this.priority.value = '';
+    }
 
-<div each={ projects }>
-  <issuetracker/>
-</div>
+    remove(e) {
+      var issue = e.item;
+      var index = this.issues.indexOf(issue);
+      this.issues.splice(index, 1);
+      this.parent.update();
+    }
 
-<script>
-  this.projects = opts.projects;
-
-  add(e) {
-		this.projects.push({ client_id: guid(), name: this.name.value, issues: []});
-		this.name.value = '';
-	}
-</script>
+    toggle(e){
+      var item = e.item;
+      item.done = !item.done;
+      this.parent.update();
+      return true;
+    }
+  </script>
 </project>
