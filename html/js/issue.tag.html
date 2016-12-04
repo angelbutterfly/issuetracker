@@ -1,0 +1,22 @@
+<issue>
+  <td>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" value="" checked={ done } onclick = { parent.toggle }></input>
+      </label>
+    </div>
+  </td>
+  <td class = "date">
+    { priority }
+  </td>
+  <td class = "date">
+    { due_date }
+  </td>
+  <td class = "description">
+    { title }
+  </td>
+  <td>
+    <span class="glyphicon glyphicon-trash" aria-hidden="true" onclick = {parent.remove }></span>
+  </td>
+  </script>
+</issue>
