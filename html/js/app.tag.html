@@ -1,7 +1,7 @@
 <app>
-<div class={ debug: opts.debug }>
+<div class={ debug: true }>
   <pre style='display:none'>
-{ JSON.stringify(store, null, 2) }
+{ JSON.stringify(appStore.load(), null, 2) }
   </pre>
   <div class="app">
     <div class="row">
@@ -69,6 +69,10 @@
     isCurrentProject(project) {
       return project.client_id === this.currentProjectClientID;
     }
+
+    this.on('update', function(foo) {
+      appStore.dump({projects: this.projects});
+    });
   </script>
   <style type="text/css">
     .debug pre {

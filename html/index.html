@@ -52,15 +52,31 @@
     <script src = "/js/project.tag.html" type = "riot/tag"></script>
     <script src = "/js/issue.tag.html" type = "riot/tag"></script>
     <script>
-      var store = {
-        debug:  true,
-        currentProject: null,
+      function Store(namespace, initialStore) {
+        this.namespace = namespace;
+        if ((typeof(initialStore) !== 'undefined') && !localStorage.getItem(namespace)) {
+          localStorage.setItem(namespace, JSON.stringify(initialStore));
+        }
+      }
+
+      Store.prototype.dump = function(store) {
+        return localStorage.setItem(this.namespace, JSON.stringify(store));
+      }
+
+      Store.prototype.load = function(issues) {
+        return JSON.parse(localStorage.getItem(this.namespace));
+      }
+
+      var initialStore = {
         projects: [
           {client_id: guid(), title: 'Project 1', issues: [{client_id: guid(), title: 'Issue 1.1', due_date: '12/12/2016', priority: 1}]},
           {client_id: guid(), title: 'Project 2', issues: [{client_id: guid(), title: 'Issue 1.2', due_date: '23/12/2016', priority: 2}]}
         ]
       };
-      riot.mount('app', store);
+
+      var appStore = new Store('issuetracker', initialStore);
+
+      riot.mount('app', appStore.load());
     </script>
   </body>
 </html>
