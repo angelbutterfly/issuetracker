@@ -54,20 +54,23 @@
     this.projects = opts.projects;
 
     add(e) {
-      var project = {client_id: guid(), title: this.projectTitle.value, issues: [], active: true};
+      var doneCallback = function( data ) {
+        project.issues = [];
+        this.projects.push(project);
+        this.projectTitle.value = '';
+        this.update();
+      }.bind(this);
+      var project = {client_id: guid(), title: this.projectTitle.value, active: true};
       $.ajax({
         method: "POST",
         url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/projects",
-        data: project,
+        data: JSON.stringify(project),
         contentType: "application/json",
         dataType: 'json',
         crossDomain: true
       })
-      .done(function( data ) {
-        console.log(data)
-      });
-      this.projects.push(project);
-      this.projectTitle.value = '';
+      .done(doneCallback);
+
     }
     remove(e) {
       var project = e.item;
