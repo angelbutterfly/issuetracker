@@ -93,6 +93,8 @@
     this.project = opts.project;
     this.issues = opts.project.issues;
 
+	
+
   add(e) {
     this.issues.push({client_id: guid(), description: this.description.value, date: this.datepicker.value});
     //issueTrackerStorage.dump(this.issues);

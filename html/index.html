@@ -66,7 +66,7 @@
       Store.prototype.load = function(issues) {
         return JSON.parse(localStorage.getItem(this.namespace));
       }
-
+      //var active = true;
       var initialStore = {
         projects: [
           {client_id: guid(), title: 'Project 1', issues: [{client_id: guid(), title: 'Issue 1.1', due_date: '12/12/2016', priority: 1}]},

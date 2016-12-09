@@ -18,7 +18,7 @@
                   <label>
                     Select a project!
                   </label>
-                  <select required=true multiple class="form-control">
+                  <select  multiple class="form-control">
                     <option each={ projects } onclick = { selectCurrentProject }>{ title } </option>
                   </select>
                 </div>
@@ -52,8 +52,21 @@
 </div>
   <script>
     this.projects = opts.projects;
+
     add(e) {
-      this.projects.push({client_id: guid(), title: this.projectTitle.value, issues: []})
+      var project = {client_id: guid(), title: this.projectTitle.value, issues: [], active: true};
+      $.ajax({
+        method: "POST",
+        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/projects",
+        data: project,
+        contentType: "application/json",
+        dataType: 'json',
+        crossDomain: true
+      })
+      .done(function( data ) {
+        console.log(data)
+      });
+      this.projects.push(project);
       this.projectTitle.value = '';
     }
     remove(e) {
