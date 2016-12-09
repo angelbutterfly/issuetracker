@@ -56,7 +56,9 @@
     add(e) {
       var doneCallback = function( data ) {
         project.issues = [];
-        this.projects.push(project);
+        console.log(data);
+        data.issues = [];
+        this.projects.push(data);
         this.projectTitle.value = '';
         this.update();
       }.bind(this);

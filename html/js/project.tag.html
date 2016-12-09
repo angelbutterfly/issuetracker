@@ -22,7 +22,7 @@
               <div class="col-md-3"><div class = "form-group">
                 <label> Choose Date
                 </label>
-                <input required=true type="text" placeholder="Chose date" name="datepicker" class="datepicker form-control"></input></div>
+                <input required=true type="text" placeholder="Chose date" name="due_date" class="datepicker form-control"></input></div>
               </div>
               <div class="col-md-4">
                 <div class = "form-group">
@@ -76,11 +76,32 @@
   </div>
   <script>
     add(e) {
-      this.issues.push({client_id: guid(), title: this.issueTitle.value, due_date: this.datepicker.value, priority: this.priority.value})
-      this.issueTitle.value = '';
-      this.datepicker.value = '';
-      this.priority.value = '';
+      var issue = {
+        client_id: guid(),
+        project_client_id: this.client_id,
+        done: false,
+        title: this.issueTitle.value,
+        priority: this.priority.value,
+        due_date: new Date(this.due_date.value).toISOString()
+      };
+      var doneCallback = function( data ) {
+        this.issues.push(data);
+        this.issueTitle.value = '';
+        this.due_date.value = '';
+        this.priority.value = '';
+        this.parent.update();
+      }.bind(this);
+      $.ajax({
+        method: "POST",
+        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" + this.id + "/issues",
+        data: JSON.stringify(issue),
+        contentType: "application/json",
+        dataType: 'json',
+        crossDomain: true
+      })
+      .done(doneCallback);
     }
+
 
     remove(e) {
       var issue = e.item;

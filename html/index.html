@@ -74,7 +74,7 @@
         ]
       };
 
-      var appStore = new Store('issuetracker', initialStore);
+      var appStore = new Store('issuetracker', {projects: []});
 
       riot.mount('app', appStore.load());
     </script>

@@ -22,7 +22,7 @@
 							<div class="col-md-3"><div class = "form-group">
 								<label> Choose Date
 								</label>
-								<input  type="text" placeholder="Chose date" name="datepicker" class="datepicker form-control"></input></div>
+								<input  type="text" placeholder="Chose date" name="due_date" class="datepicker form-control"></input></div>
 							</div>
 							<div class="col-md-4">
 								<div class = "form-group">
@@ -93,7 +93,8 @@
     this.project = opts.project;
     this.issues = opts.project.issues;
 
-	
+
+		
 
   add(e) {
     this.issues.push({client_id: guid(), description: this.description.value, date: this.datepicker.value});
