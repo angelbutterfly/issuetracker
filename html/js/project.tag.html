@@ -102,6 +102,12 @@
       .done(doneCallback);
     }
 
+    $.ajax({
+      method: "DELETE",
+      url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.client_id + "/issues/" + this.id,
+      contentType: "application/json",
+      dataType: 'json',
+    })
 
     remove(e) {
       var issue = e.item;
