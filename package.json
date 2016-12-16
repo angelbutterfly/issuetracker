@@ -1,0 +1,20 @@
+{
+  "name": "issuetracker",
+  "version": "0.0.1",
+  "description": "Web3 Project - Issuetracker",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "servidor.js",
+  "scripts": {
+    "start": "node servidor.js"
+  },
+  "dependencies": {
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angelbutterfly/issuetracker.git"
+  }
+
+}
