@@ -65,7 +65,7 @@
       var project = {client_id: guid(), title: this.projectTitle.value, active: true};
       $.ajax({
         method: "POST",
-        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/projects",
+        url: "https://zhaw-web3-issue-tracker-api.herokuapp.com/api/projects",
         data: JSON.stringify(project),
         contentType: "application/json",
         dataType: 'json',

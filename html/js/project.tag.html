@@ -93,7 +93,7 @@
       }.bind(this);
       $.ajax({
         method: "POST",
-        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" + this.id + "/issues",
+        url: "https://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" + this.id + "/issues",
         data: JSON.stringify(issue),
         contentType: "application/json",
         dataType: 'json',
@@ -111,7 +111,7 @@
       }.bind(this);
       $.ajax({
         method: "DELETE",
-        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id,
+        url: "https://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id,
         contentType: "application/json",
         dataType: 'json',
         crossDomain: true
@@ -127,7 +127,7 @@
       }.bind(this);
       $.ajax({
         method: "PUT",
-        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id,
+        url: "https://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id,
         data: JSON.stringify(issue),
         contentType: "application/json",
         dataType: 'json',
