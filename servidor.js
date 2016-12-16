@@ -56,7 +56,7 @@ var server = http.createServer(function(request, response) {
 });
 
 
-  server.listen(5000, function(o){
+  server.listen((process.env.PORT || 5000), function(o){
 	var instance = this;
 	console.log("NodeJS Server: listening for Http Requests at ["+instance._connectionKey+"]");
 	console.log("-----------------------------------------------------------------");
