@@ -102,18 +102,24 @@
       .done(doneCallback);
     }
 
-    $.ajax({
-      method: "DELETE",
-      url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.client_id + "/issues/" + this.id,
-      contentType: "application/json",
-      dataType: 'json',
-    })
+      remove(e) {
 
-    remove(e) {
       var issue = e.item;
       var index = this.issues.indexOf(issue);
-      this.issues.splice(index, 1);
-      this.parent.update();
+      alert("http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id);
+      var doneCallback = function( data ) {
+        this.issues.splice(index, 1);
+        this.parent.update();
+      }.bind(this);
+      $.ajax({
+        method: "DELETE",
+        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id,
+        contentType: "application/json",
+        dataType: 'json',
+        crossDomain: true
+      })
+      .done(doneCallback);
+
     }
 
     toggle(e){
