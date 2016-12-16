@@ -102,11 +102,9 @@
       .done(doneCallback);
     }
 
-      remove(e) {
-
+    remove(e) {
       var issue = e.item;
       var index = this.issues.indexOf(issue);
-      alert("http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id);
       var doneCallback = function( data ) {
         this.issues.splice(index, 1);
         this.parent.update();
@@ -119,14 +117,23 @@
         crossDomain: true
       })
       .done(doneCallback);
-
     }
 
     toggle(e){
-      var item = e.item;
-      item.done = !item.done;
-      this.parent.update();
-      return true;
+      var issue = e.item;
+      issue.done = !issue.done;
+      var doneCallback = function( data ) {
+        this.parent.update();
+      }.bind(this);
+      $.ajax({
+        method: "PUT",
+        url: "http://zhaw-web3-issue-tracker-api.herokuapp.com/api/project/" +this.id + "/issues/" + issue.id,
+        data: JSON.stringify(issue),
+        contentType: "application/json",
+        dataType: 'json',
+        crossDomain: true
+      })
+      .done(doneCallback);
     }
   </script>
 </project>
